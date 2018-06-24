@@ -1,0 +1,44 @@
+.wid100 {
+    width: 100%;
+}
+.vibrant {
+    background-color: rgb(247,247,247);
+}
+
+.vibrant .navbar {
+    background-color: rgb(255,255,255) !important;
+}
+
+.vibrant .navbar a{
+    color: rgb(236,52,53) !important;
+}
+
+.vibrant .live-score-head {
+    color: rgb(236,52,53) !important;
+}
+
+.vibrant .tex5p {
+    font-size: 5px;
+}
+
+.vibrant .tex10p {
+    font-size: 10px;
+}
+
+.vibrant .live-score-block .flag img {
+    width: 20px;
+}
+
+.vibrant .live-score-block .country img {
+    width: 20px;
+}
+
+.vibrant .pad0 {
+    padding: 0px;
+}
+
+.vibrant .live-score-block {
+    font-size: 10px;
+    min-height: 50px;
+    float: left;
+}

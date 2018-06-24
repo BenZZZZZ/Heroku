@@ -1,0 +1,7 @@
+{
+    "require": {
+        "symfony/yaml": "^3.4",
+        "silex/silex": "^2.2",
+        "symfony/web-link": "^3.4"
+    }
+}

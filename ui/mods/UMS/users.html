@@ -1,0 +1,204 @@
+<div class="checkAccess" data-api="checkAccess"></div>
+<div class="row mar0 hide permsCheck" perms-check="admin">
+    <div class="table-responsive">
+        <div class="filTabPagData" data-api="dbentities/list/users" data-p="1" data-l="5" id="usersList">
+            <div class="text-center">
+                <ul class="pagination pagination-sm filPagData">
+                    <li class="{{class}} template"><a href="#">{{page}}</a></li>
+                </ul>
+            </div>
+            <table class="table table-hover filTabData">
+                <thead>
+                    <tr>
+                        <th data-name="name">
+                            <div class="sort">Name</div>
+                            <input type="text" class="form-control">
+                        </th>
+                        <th data-name="phone">
+                            <div class="sort">Mobile</div>
+                            <input type="text" class="form-control">
+                        </th>
+                        <th data-name="email">
+                            <div class="sort">Email</div>
+                            <input type="text" class="form-control">
+                        </th>
+                        <th>
+                            <button class="btn btn-success clickModalBtn permsCheck" data-modal="#addUserModal" perms-check="admin">Add</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="template">
+                        <td>{{name}}</td>
+                        <td>{{phone}}</td>
+                        <td>{{email}}</td>
+                        <td>
+                            <button type="button" class="btn btn-success clickModalBtn" data-id="{{id}}" data-modal="#addUserModal">Edit</button>
+                            <button type="button" class="btn btn-success openRolesModal" data-id="{{id}}" data-modal="#userRolesModal">Set Roles</button>
+                            <button type="button" class="btn btn-success openUserPermsModal" data-id="{{id}}" data-modal="#userPermsModal">Set Permissions</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addUserModal" role="dialog" data-api="dbentities/list/users/{id}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add/Edit User</h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <input type="hidden" name="id">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Name</label>
+                        <input type="text" class="form-control" name="name">
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="control-label">Mobile</label>
+                        <input type="text" class="form-control" name="phone">
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email</label>
+                        <input type="email" class="form-control" name="email">
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd" class="control-label">Password</label>
+                        <input type="text" class="form-control" name="pwd">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success formSubBtn" data-api="dbentities/update/users" data-dismiss="modal" data-ref="usersList">Save</button>
+                        <button type="button" class="btn btn-danger formSubBtn permsCheck" data-dismiss="modal" data-api="dbentities/delete/users" data-dismiss="modal" data-ref="usersList" perms-check="superadmin">Delete</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="userRolesModal" role="dialog" data-api="users/{id}/roles">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Set User Roles</h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <input type="hidden" name="id">
+                    <div class="form-group">
+                        <div class="filTemplateData" data-api="dbentities/list/roles" data-p="a">
+                            <div class="template checkbox-inline">
+                                <label>
+                                    <input type="checkbox" name="name" value="{{id}}">{{name}}
+                                </label>
+                            </div>
+                        </div>
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success formSubBtn" data-api="users/roles/update" data-dismiss="modal" data-ref="usersList">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="userPermsModal" role="dialog" data-api="users/{id}/perms">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Set User Permissions</h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <input type="hidden" name="id">
+                    <div class="form-group">
+                        <div class="filTemplateData" data-api="dbentities/list/perms" data-p="a">
+                            <div class="template checkbox-inline">
+                                <label>
+                                    <input type="checkbox" name="name" value="{{id}}">{{name}}
+                                </label>
+                            </div>
+                        </div>
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success formSubBtn" data-api="users/perms/update" data-dismiss="modal" data-ref="usersList">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    route('.header-load', 'components/header');
+    route('.footer-load', 'components/footer');
+
+    $(document).on('click', '.openRolesModal', function(){
+        var modalId = $(this).attr('data-modal'), url, results;
+        if($(this).attr('data-id') !== undefined && $(modalId).attr('data-api') !== undefined){
+            url = APIURL + $(modalId).attr('data-api').split('{id}').join($(this).attr('data-id'));
+            results = aC('GET', url);
+            rDF(results);
+            $(modalId).find('form').find('input[name=id]').val($(this).attr('data-id'));
+            $(modalId).find('form').find("input[name!='id']").slice(1).each(function(){
+                $(this).prop('checked', false);
+            });
+            $.each(results.data, function(k, v){
+                $(modalId).find('form').find("input[name!='id']").slice(1).each(function(){
+                    if(v['roles_id'] === $(this).val()){
+                        $(this).prop('checked', true);
+                    }
+                });
+            });
+        }
+        $(modalId).find('button.formSubBtn').attr('data-api').split('{id}').join($(this).attr('data-id'));
+        $(modalId).modal('show');
+    });
+
+    $(document).on('click', '.openUserPermsModal', function(){
+        var modalId = $(this).attr('data-modal'), url, results;
+        if($(this).attr('data-id') !== undefined && $(modalId).attr('data-api') !== undefined){
+            url = APIURL + $(modalId).attr('data-api').split('{id}').join($(this).attr('data-id'));
+            results = aC('GET', url);
+            rDF(results);
+            $(modalId).find('form').find('input[name=id]').val($(this).attr('data-id'));
+            $(modalId).find('form').find("input[name!='id']").slice(1).each(function(){
+                $(this).prop('checked', false);
+            });
+            $.each(results.data, function(k, v){
+                $(modalId).find('form').find("input[name!='id']").slice(1).each(function(){
+                    if(v['id'] == $(this).val()){
+                        $(this).prop('checked', true);
+                    }
+                });
+            });
+        }
+        $(modalId).find('button.formSubBtn').attr('data-api').split('{id}').join($(this).attr('data-id'));
+        $(modalId).modal('show');
+    });
+</script>

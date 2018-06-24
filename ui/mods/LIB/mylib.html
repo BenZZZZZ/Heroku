@@ -1,0 +1,54 @@
+<div class="checkAccess" data-api="checkAccess"></div>
+<div class="row mar0 hide permsCheck" perms-check="user">
+    <div class="table-responsive">
+        <div class="filTabPagData" data-api="libraries/listMyLibs" data-p="1" data-l="5" id="librariesList">
+            <div class="text-center">
+                <ul class="pagination pagination-sm filPagData">
+                    <li class="{{class}} template"><a href="#">{{page}}</a></li>
+                </ul>
+            </div>
+            <table class="table table-hover filTabData">
+                <thead>
+                    <tr>
+                        <th data-name="name">
+                            <div class="sort">Name</div>
+                            <input type="text" class="form-control">
+                        </th>
+                        <th data-name="isbn">
+                            <div class="sort">ISBN</div>
+                            <input type="text" class="form-control">
+                        </th>
+                        <th data-name="type">
+                            <div class="sort">Type</div>
+                            <!-- <input type="text"> -->
+                            <select class="form-control">
+                                <option value="">Select</option>
+                                <option value="1">Book</option>
+                                <option value="2">Video</option>
+                                <option value="3">Game</option>
+                            </select>
+                        </th>
+                        <th>
+                            <button class="btn btn-success clickModalBtn permsCheck" data-modal="#addLibModal" perms-check="superadmin">Add</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="template">
+                        <td>{{name}}</td>
+                        <td>{{isbn}}</td>
+                        <td>{{type}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger btnClickList permsCheck" data-api="dbentities/delete/libraries" data-dismiss="modal" data-ref="librariesList" perms-check="user" data-id="{{id}}">remove from my list</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    route('.header-load', 'components/header');
+    route('.footer-load', 'components/footer');
+</script>

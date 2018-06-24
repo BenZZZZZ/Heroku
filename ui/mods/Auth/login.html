@@ -1,0 +1,88 @@
+
+<div class="row mar0">
+    <div class = "col-sm-12">
+        <div class = "panel panel-primary">
+            <div class = "panel-heading">
+                <h3 class = "panel-title">LOGIN</h3>
+            </div>
+            <div class = "panel-body">
+                <form>
+                    <div class="form-group">
+                        <label for="un" class="control-label">Email/Mobile</label>
+                        <input type="text" class="form-control" name="un">
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lpwd" class="control-label">Password:</label>
+                        <input type="password" class="form-control" name="lpwd">
+                        <span class="help-block"></span>
+                    </div>
+                    <button type="button" class="btn btn-default formSubBtn" data-api="login">Login</button>
+                    <!-- <button type="button" class="btn btn-primary fblogin" data-api="login">Login via Facebook</button> -->
+                    <fb:login-button 
+                        scope="public_profile,email"
+                        onlogin="checkLoginState();">
+                    </fb:login-button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    route('.header-load', 'components/header');
+    route('.footer-load', 'components/footer');
+    // $('.header-load').load('components/header.php');
+    // $('.footer-load').load('components/footer.php');
+
+
+    function checkLoginState(){
+        FB.getLoginStatus(function(response) {
+            if (response.authResponse) {
+                console.log('Welcome!  Fetching your information.... ');
+                FB.api('/me?fields=id,name,email', function(response) {
+                    // console.log(response);
+                    // console.log('Good to see you, ' + response.id + '.');
+                    // console.log('Good to see you, ' + response.name + '.');
+                    // console.log('Good to see you, ' + response.email + '.');
+                    // console.log('Good to see you, ' + response.first_name + '.');
+                    url = APIURL + "fblogin";
+                    data = {};
+                    data.id = response.id;
+                    data.name = response.name;
+                    data.email = response.email;
+                    results = aC('POST', url, data);
+                    rDF(results);
+                });
+            } else {
+                alert('User cancelled authorization.');
+            }
+        });
+    }
+    $(document).ready(function(){
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1659615254165426',
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v3.0'
+            });
+
+            FB.AppEvents.logPageView();
+
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        $(document).on('click', '.fblogin', function(){
+            checkLoginState();
+        });
+    });
+</script>

@@ -1,0 +1,58 @@
+
+<div class="row mar0">
+    <div class="col-sm-12">
+        <input type="text" class="form-control search" id="search">
+        <div class="btn-group groupContactButton pull-right">
+            <input type="button" class="btn btn-dflt clickModalBtn" value="Add Contact" data-modal="#addContactModal">
+            <input type="button" class="btn btn-dflt" value="Add Group">
+            <input type="button" class="btn btn-dflt" value="Add Game">
+        </div>
+    </div>
+    <div class="col-sm-12 onVisible" data-api="myContactMessages">
+        <div class="template bgwhite">
+            <div>
+                <h3><b>{{contactName}}</b></h3>
+                <p>{{contactNo}} : {{msg}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addContactModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Contact</h4>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Name</label>
+                        <input type="text" class="form-control" id="name">
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="un" class="control-label">Email/Mobile</label>
+                        <input type="text" class="form-control" id="un">
+                        <span class="help-block"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success formSubBtn" data-api="addContact">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    route('.header-load', 'components/header');
+    route('.footer-load', 'components/footer');
+</script>

@@ -1,0 +1,106 @@
+Copyright © Times Business Solutions (A Division of Times Internet Limited) 2018.
+<script type="text/javascript">
+    $('.onVisible').each(function(){
+        sL();
+        var url = APIURL + $(this).attr('data-api'),
+        results = aC('POST', url, {});
+        rDF(results);
+        hL();
+    });
+
+    $('.filTabPagData').each(function(){
+        var url = filTabPagDataFnUrl($(this));
+        filTabPagDataFn($(this), url);
+    });
+
+    $('.filTemplateData').each(function(){
+        var url = APIURL + $(this).attr('data-api') + '?p=a', results;
+        filTemplateDataFn($(this), url);
+    });
+
+    $(document).on('click', '.filTabPagData .filTabPag', function(){
+        var parentTag = $(this).parents('.filTabPagData'),
+            page = $(this).text(), limit = parentTag.attr('data-l'),
+            url = APIURL + parentTag.attr('data-api') + '?p=' + page + '&l=' + limit;
+            filTabPagDataFn(parentTag, url);
+    });
+
+    $(document).on('click', '.filTabPagData .filTabData thead th div.sort', function(){
+        var parentTh = $(this).parents('th');
+        $(this).parents('thead').find('th div.sort span').each(function(){
+            $(this).remove();
+        });
+        if(parentTh.attr('data-name') !== undefined){
+            var parentTag = parentTh.parents('.filTabPagData'),
+                page = parentTag.attr('data-p'), limit = parentTag.attr('data-l'),
+                sort = parentTh.attr('data-name'), sortOrder, url;
+            if(parentTh.attr('data-sort') === undefined || parentTh.attr('data-sort') === 'asc'){
+                parentTh.attr('data-sort', 'desc');
+                parentTh.find('.sort').append('<span class="glyphicon glyphicon-chevron-up pull-right">');
+                sortOrder = 'asc';
+            }else{
+                parentTh.attr('data-sort', 'asc');
+                parentTh.find('.sort').append('<span class="glyphicon glyphicon-chevron-down pull-right">');
+                sortOrder = 'desc';
+            }
+            url = APIURL + parentTag.attr('data-api') + '?p=' + page + '&l=' + limit + '&s=' + sort + '&so=' + sortOrder;
+            filTabPagDataFn(parentTag, url);
+        }
+    });
+
+    $(document).on('keyup', '.filTabPagData .filTabData thead th input', function(){
+        var parentTh = $(this).parents('th');
+        if(parentTh.attr('data-name') !== undefined){
+            var parentTag = parentTh.parents('.filTabPagData'),
+                page = parentTag.attr('data-p'),
+                limit = parentTag.attr('data-l'),
+                sort = parentTh.attr('data-name'),
+                sortOrder = parentTh.attr('data-sort'), url;
+            if(sortOrder === undefined){
+                sortOrder = "asc";
+            }
+            url = APIURL + parentTag.attr('data-api') + '?p=' + page + '&l=' + limit + '&s=' + sort + '&so=' + sortOrder;
+            filTabPagDataFn(parentTag, url);
+        }
+    });
+
+    $(document).on('change', '.filTabPagData .filTabData thead th select', function(){
+        var parentTh = $(this).parents('th');
+        if(parentTh.attr('data-name') !== undefined){
+            var parentTag = parentTh.parents('.filTabPagData'),
+                page = parentTag.attr('data-p'),
+                limit = parentTag.attr('data-l'),
+                sort = parentTh.attr('data-name'),
+                sortOrder = parentTh.attr('data-sort'), url;
+            if(sortOrder === undefined){
+                sortOrder = "asc";
+            }
+            url = APIURL + parentTag.attr('data-api') + '?p=' + page + '&l=' + limit + '&s=' + sort + '&so=' + sortOrder;
+            filTabPagDataFn(parentTag, url);
+        }
+    });
+
+    if($('.checkAccess').is(':visible')){ //if the container is visible on the page
+        var results = aC('POST', APIURL + 'checkAccess', {});
+        rDF(results);
+    }
+
+    $('.permsCheck').each(function(){
+        var ePerms = $(this).attr('perms-check');
+        pagePerms[pagePermsCount] = ePerms;
+        pagePermsElement[pagePermsCount] = $(this);
+        pagePermsCount ++;
+    });
+
+    $(document).ready(function(){
+        var url = APIURL + 'checkPerms';
+        results = aC('POST', url, pagePerms);
+        $.each(results.access, function(k, v){
+            if(v === true){
+                pagePermsElement[k].css("display", "inline");
+            }else{
+                pagePermsElement[k].remove();
+            }
+        });
+    });
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+    <html lang="en" class="vibrant">
+        <head>
+            <title>KRDS Assignment</title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="public/bootstrap/3.3.7/css/bootstrap.min.css" disabled="disabled">
+            <link rel="stylesheet" href="public/css/var1.css" class="styleFile">
+            <script src="public/jquery/3.2.1/jquery.min.js"></script>
+            <script src="public/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="public/exjs/mustache.js"></script>
+            <script src="public/js/routes.js"></script>
+            <script src="public/js/params.js"></script>
+            <script src="public/js/default.js"></script>
+            <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+            <script type="text/javascript" src="public/jHtmlArea/scripts/jHtmlArea-0.8.js"></script>
+            <link rel="Stylesheet" type="text/css" href="public/jHtmlArea/style/jHtmlArea.css" />
+        </head>
+        <body>
+            <div class="container-fluid pad0">
+                <div id="loader" class="hide"><p><img src="img/loader1.gif"></p></div>
+                <div class="header-load"></div>
+                <div class="route"></div>
+                <div class="footer-load"></div>
+
+            </div>
+        </body>
+    </html>
+
+<script type="text/javascript"> 
+
+    $(document).ready(function(){
+        route('.route', ROUTE);
+    });
+</script>

@@ -1,0 +1,8 @@
+DB:
+    type: mysql
+    host: localhost
+    # host: 192.168.43.27
+    un: benz
+    pass: benz
+    db: krds
+appPath: /var/www/host

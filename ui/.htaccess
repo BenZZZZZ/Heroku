@@ -1,0 +1,20 @@
+Options -Indexes
+
+# deny from 172.16.74.28
+# deny from all
+# allow from 172.16.74.28 172.16.74.27
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.*)$ index.html?url=$1 [QSA,L]
+
+# AuthName "w2s"
+# AuthType Basic
+# AuthUserFile /var/www/html/BenZ/Test/Test3/W2S/.htpasswd
+# Require valid-user
+
+ErrorDocument 403 /var/www/html/Test/Test3/W2S/test.html
