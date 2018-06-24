@@ -29,9 +29,9 @@ use Extlibs\AppValidator;
 use Libs\DB;
 use App\Auth\Auth;
 use App\UMS\Users;
-use App\PR\Reviewer;
-use App\PR\Student;
-use App\PR\Docs;
+// use App\PR\Reviewer;
+// use App\PR\Student;
+// use App\PR\Docs;
 use App\DbEntities;
 use App\LIB\Lib;
 use App\LIB\MyLib;
@@ -51,9 +51,9 @@ try {
     // $db->con->exec("insert into users set test='test'");
 
     $users = new Users($db, $validator);
-    $reviewer = new Reviewer($db, $validator);
-    $student = new Student($db, $validator);
-    $docs = new Docs($db, $validator);
+    // $reviewer = new Reviewer($db, $validator);
+    // $student = new Student($db, $validator);
+    // $docs = new Docs($db, $validator);
     $auth = new Auth($db, $validator, $users);
     $dbEntities = new DbEntities($db, $validator);
     $lib = new Lib($db, $validator);
@@ -64,9 +64,9 @@ try {
         'db' => $db,
         'auth' => $auth,
         'users' => $users,
-        'reviewer' => $reviewer,
-        'student' => $student,
-        'docs' => $docs,
+        // 'reviewer' => $reviewer,
+        // 'student' => $student,
+        // 'docs' => $docs,
         'lib' => $lib,
         'myLib' => $myLib,
     ];

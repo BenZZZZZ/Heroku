@@ -76,6 +76,8 @@ class DbEntities {
     }
 
     function delete($entityName, $params) {
+        var_dump($entityName);
+        var_dump($params);
         $this->db->d($entityName, $params);
         return [
             'status' => "true",
